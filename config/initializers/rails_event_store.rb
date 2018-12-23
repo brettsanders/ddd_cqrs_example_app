@@ -28,13 +28,17 @@ Rails.configuration.to_prepare do
   end
 
   Rails.configuration.command_bus.tap do |bus|
+    # Ordering
     bus.register(Ordering::SubmitOrder, Ordering::OnSubmitOrder.new(number_generator: Rails.configuration.number_generator))
     bus.register(Ordering::SetOrderAsExpired, Ordering::OnSetOrderAsExpired.new)
     bus.register(Ordering::MarkOrderAsPaid, Ordering::OnMarkOrderAsPaid.new)
     bus.register(Ordering::AddItemToBasket, Ordering::OnAddItemToBasket.new)
     bus.register(Ordering::RemoveItemFromBasket, Ordering::OnRemoveItemFromBasket.new)
+    # Payments
     bus.register(Payments::AuthorizePayment, Payments::OnAuthorizePayment.new)
     bus.register(Payments::CapturePayment, Payments::OnCapturePayment.new)
     bus.register(Payments::ReleasePayment, Payments::OnReleasePayment.new)
+    # Wallets
+    bus.register(Wallets::AddMoneyToWallet, Wallets::OnAddMoneyToWallet.new)
   end
 end

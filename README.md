@@ -1,3 +1,17 @@
+Notes:
+run single test w/ mini-test
+`rake test TEST=wallets/test/add_money_to_wallet_test.rb`
+
+creating event
+`Rails.configuration.event_store.publish(InvoicePrinted.new(data: {invoice_number: 'FV-1/12/18'}))`
+
+reading events
+`Rails.configuration.event_store.read.to_a`
+
+view events in "event browser"
+`visit localhost:3003/res`
+
+
 # cqrs-es-sample-with-res
 
 CQRS with Event Sourcing sample app using [Rails Event Store](https://railseventstore.org). See it [live](https://cqrs-es-sample-with-res.herokuapp.com/).
