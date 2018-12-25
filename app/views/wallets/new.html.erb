@@ -1,0 +1,8 @@
+<h1>New Wallet</h1>
+
+<%= form_tag({controller: "wallets", action: "create"}, method: "post") do %>
+  <%= hidden_field_tag(:wallet_id, @wallet_id) %>
+
+  <%= submit_tag("Create wallet", class: "btn btn-primary") %>
+  <%= link_to 'Back', orders_path, class: "btn btn-default" %>
+<% end %>

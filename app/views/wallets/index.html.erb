@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Wallets</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Wallet ID</th>
+      <th>Balance</th>
+      <th>History</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @wallets.each do |wallet| %>
+      <tr>
+        <td><%= link_to wallet.uid, wallet_path(wallet.uid) %></td>
+        <td><%= number_to_currency wallet.balance %></td>
+        <td>TODO</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Wallet', new_wallet_path, class: "btn btn-primary" %>
+<br/>
+
