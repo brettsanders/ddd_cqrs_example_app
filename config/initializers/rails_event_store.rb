@@ -50,6 +50,7 @@ Rails.configuration.to_prepare do
     bus.register(Payments::ReleasePayment, Payments::OnReleasePayment.new)
 
     # Wallets (Commands)
+    bus.register(Wallets::CreateNewWallet, Wallets::OnCreateNewWallet.new)
     bus.register(Wallets::AddMoneyToWallet, Wallets::OnAddMoneyToWallet.new)
   end
 end
