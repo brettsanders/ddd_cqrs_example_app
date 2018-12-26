@@ -1,8 +1,19 @@
 <p id="notice"><%= notice %></p>
+
+<%= link_to 'View All Wallets', wallets_path, class: "btn btn-default" %>
 <h1>Manage your Wallet</h1>
-<h3>UID: <%= @wallet.uid %></h3>
-<h3>Balance: <%= number_to_currency @wallet.balance %></h3>
 
-
-<br/>
-<%= link_to 'Back', wallets_path, class: "btn btn-default" %>
+<table class="table-bordered">
+  <tr>
+    <td>UID</td>
+    <td><%= @wallet.uid %></td>
+  <tr>
+  <tr>
+    <td>Balance</td>
+    <td><%= number_to_currency @wallet.balance %></td>
+  <tr>
+  <tr>
+    <td>Created By</td>
+    <td><%= @wallet.created_by %></td>
+  </tr>
+<table>

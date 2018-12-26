@@ -7,6 +7,7 @@
     <tr>
       <th>Wallet ID</th>
       <th>Balance</th>
+      <th>Created By</th>
       <th>History</th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= link_to wallet.uid, wallet_path(wallet.uid) %></td>
         <td><%= number_to_currency wallet.balance %></td>
+        <td><%= wallet.created_by %></td>
         <td>TODO</td>
       </tr>
     <% end %>
