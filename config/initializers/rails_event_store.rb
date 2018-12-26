@@ -32,6 +32,7 @@ Rails.configuration.to_prepare do
     ])
 
     # Wallets (Subscriptions)
+    store.subscribe(WalletsReadModel::OnNewWalletCreated, to: [Wallets::NewWalletCreated])
     store.subscribe(WalletsReadModel::OnMoneyAddedToWallet, to: [Wallets::MoneyAddedToWallet])
   end
 
