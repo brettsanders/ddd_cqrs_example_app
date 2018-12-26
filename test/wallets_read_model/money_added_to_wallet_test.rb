@@ -6,6 +6,10 @@ module WalletsReadModel
       event_store = Rails.configuration.event_store
 
       wallet_id = SecureRandom.uuid
+      wallet = Wallet.create!(
+        uid: wallet_id,
+        balance: 0
+      )
 
       event_store.publish(
         Wallets::MoneyAddedToWallet.new(
