@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_26_161630) do
+ActiveRecord::Schema.define(version: 2018_12_27_045754) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(version: 2018_12_26_161630) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "wallet_transactions", force: :cascade do |t|
+    t.string "wallet_uid"
+    t.integer "transaction_type", default: 0
+    t.string "description"
+    t.integer "amount_deposited"
+    t.integer "amount_withdrawn"
+    t.integer "balance"
   end
 
   create_table "wallets", force: :cascade do |t|

@@ -21,6 +21,16 @@ module WalletsReadModel
       wallet = Wallet.find_by(uid: wallet_id)
       assert_equal(wallet.balance, 100)
       assert_equal(wallet.uid, wallet_id)
+
+      # Transactions
+      wallet_transactions = WalletTransaction.where(wallet_uid: wallet.uid)
+      assert_equal(wallet_transactions.length, 1)
+
+      wt = wallet_transactions.first
+      assert_equal(wt.wallet_uid, wallet.uid)
+      assert_equal(wt.transaction_type, "deposit")
+      assert_equal(wt.description, "")
+      assert_equal(wt.balance, 100)
     end
   end
 end
