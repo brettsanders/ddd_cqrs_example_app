@@ -13,7 +13,7 @@ module WalletsReadModel
       WalletTransaction.create!(
         wallet_uid: wallet.uid,
         transaction_type: :deposit,
-        description: "",
+        description: event.data[:description],
         amount_deposited: event.data[:amount],
         balance: wallet.balance
       )
