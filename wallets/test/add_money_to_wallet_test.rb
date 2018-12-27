@@ -36,7 +36,11 @@ module Wallets
         published,
         [
           MoneyAddedToWallet.new(
-            data: {wallet_id: @aggregate_id, amount: amount}
+            data: {
+              wallet_id: @aggregate_id,
+              amount: amount,
+              description: description
+            }
           )
         ]
       )
@@ -50,7 +54,8 @@ module Wallets
           @stream,
           AddMoneyToWallet.new(
             wallet_id: @aggregate_id,
-            amount: amount
+            amount: amount,
+            description: ""
           )
         )
       end

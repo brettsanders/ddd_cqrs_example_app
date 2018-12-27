@@ -1,7 +1,7 @@
 <%= link_to 'View All Wallets', wallets_path, class: "btn btn-default" %>
 <h1>Manage your Wallet</h1>
 
-<table class="table-bordered">
+<table class="table table-bordered">
   <tr>
     <td>UID</td>
     <td><%= @wallet.uid %></td>
@@ -20,12 +20,18 @@
   </tr>
   <tr>
     <td>
-      Add Funds
+      Deposit
     </td>
     <td>
       <%= form_tag({controller: "wallets", action: "add_money"}, method: "post") do %>
-        <%= number_field_tag(:amount_to_add) %>
-        <%= submit_tag("Add Money", class: "btn btn-sm btn-primary") %>
+        Amount
+        <%= number_field_tag(:amount_to_add, nil, placeholder: 'deposit amount') %><br>
+
+        Description
+        <%= text_field_tag(:description, nil, placeholder: "why..") %>
+
+        <br>
+        <%= submit_tag("Desposit Money", class: "btn btn-sm btn-primary") %>
       <% end %>
     </td>
   </tr>

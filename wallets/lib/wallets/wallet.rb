@@ -24,10 +24,17 @@ module Wallets
       apply NewWalletCreated.new(data: {wallet_id: @id, amount: @amount, created_by: user})
     end
 
-    def add_money(amount)
+    def add_money(amount, description)
       raise InvalidWalletNoCreator if created_by.nil?
       raise InvalidAmount if amount < 0
-      apply MoneyAddedToWallet.new(data: {wallet_id: @id, amount: amount})
+
+      apply MoneyAddedToWallet.new(
+        data: {
+          wallet_id: @id,
+          amount: amount,
+          description: description
+        }
+      )
     end
 
     on NewWalletCreated do |event|
