@@ -23,4 +23,19 @@ class WalletsController < ApplicationController
       redirect_to new_wallet_path
     end
   end
+
+  def add_money
+    cmd = Wallets::AddMoneyToWallet.new(
+      wallet_id: params[:id],
+      amount: params[:amount_to_add])
+    command_bus.(cmd)
+
+    redirect_to wallet_path(params[:id])
+  end
+
+  def history
+    wallet_uid = params[:id]
+    stream_name = "Wallets::Wallet$#{wallet_uid}"
+    @event_history = event_store.read.backward.stream(stream_name).from(:head).to_a
+  end
 end

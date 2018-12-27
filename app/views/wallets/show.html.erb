@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <%= link_to 'View All Wallets', wallets_path, class: "btn btn-default" %>
 <h1>Manage your Wallet</h1>
 
@@ -13,7 +11,22 @@
     <td><%= number_to_currency @wallet.balance %></td>
   <tr>
   <tr>
-    <td>Created By</td>
-    <td><%= @wallet.created_by %></td>
+    <td>
+      Created By
+    </td>
+    <td>
+      <%= @wallet.created_by || "Unknown" %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Add Funds
+    </td>
+    <td>
+      <%= form_tag({controller: "wallets", action: "add_money"}, method: "post") do %>
+        <%= number_field_tag(:amount_to_add) %>
+        <%= submit_tag("Add Money", class: "btn btn-sm btn-primary") %>
+      <% end %>
+    </td>
   </tr>
 <table>

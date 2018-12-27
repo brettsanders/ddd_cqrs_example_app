@@ -18,7 +18,7 @@
         <td><%= link_to wallet.uid, wallet_path(wallet.uid) %></td>
         <td><%= number_to_currency wallet.balance %></td>
         <td><%= wallet.created_by %></td>
-        <td>TODO</td>
+        <td><%= link_to "View history", history_wallet_path(wallet.uid) %></td>
       </tr>
     <% end %>
   </tbody>

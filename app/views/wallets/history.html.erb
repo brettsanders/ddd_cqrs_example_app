@@ -1,0 +1,26 @@
+<%= link_to 'View All Wallets', wallets_path, class: "btn btn-default" %>
+<h1>Wallet History</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Deposits/Credits</th>
+      <th>Withdrawals/Debits</th>
+      <th>Balance</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_history.each do |event| %>
+      <tr>
+        <td><%= event.timestamp.strftime("%m/%d/%y") %></td>
+        <td><%= event.type.split("::")[1].titleize %></td>
+        <td><%= number_to_currency event.data[:amount] %></td>
+        <td>todo</td>
+        <td>todo</td>
+      </tr>
+    <% end %>
+  </tbody>
+<table>

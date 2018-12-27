@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :wallets, only: [:index, :show, :new, :create] do
     member do
       post :add_money
+      get :history
     end
   end
 
