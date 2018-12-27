@@ -7,6 +7,8 @@ class CreateWalletTransactions < ActiveRecord::Migration[5.2]
       t.integer :amount_deposited
       t.integer :amount_withdrawn
       t.integer :balance
+
+      t.timestamps null: false
     end
   end
 end

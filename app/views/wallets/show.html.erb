@@ -11,6 +11,10 @@
     <td><%= number_to_currency @wallet.balance %></td>
   <tr>
   <tr>
+    <td>Transaction History</td>
+    <td><%= link_to "View history", history_wallet_path(@wallet.uid) %></td>
+  </tr>
+  <tr>
     <td>
       Created By
     </td>

@@ -64,6 +64,8 @@ ActiveRecord::Schema.define(version: 2018_12_27_045754) do
     t.integer "amount_deposited"
     t.integer "amount_withdrawn"
     t.integer "balance"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "wallets", force: :cascade do |t|
