@@ -10,24 +10,25 @@ module Wallets
 
     cover 'Wallets::OnAddMoneyToWallet*'
 
-    test 'money is added to wallet' do
-      aggregate_id = SecureRandom.uuid
-      stream = "Wallets::Wallet$#{aggregate_id}"
+    def setup
+      @aggregate_id = SecureRandom.uuid
+      @stream = "Wallets::Wallet$#{@aggregate_id}"
+      # Must create Wallet first
+      act(@stream, CreateNewWallet.new(wallet_id: @aggregate_id))
+    end
 
-      # value object - where put?
-      # first, do just plain amount then try to add currency
-      # Money = Struct.new(:amount, :curency)
-      # money = Money.new(100, 'USD')
+    test 'money deposited' do
+      # 'act' adds the event then diffs before/after of event @stream
+      # returns just the 'published' events
 
       amount = 100
-
-      # 'act' adds the event then diffs before/after of event stream
-      # returns just the 'published' events
+      description = "Funding from Mr VC Man"
       published = act(
-        stream,
+        @stream,
         AddMoneyToWallet.new(
-          wallet_id: aggregate_id,
-          amount: amount
+          wallet_id: @aggregate_id,
+          amount: amount,
+          description: description
         )
       )
 
@@ -35,23 +36,20 @@ module Wallets
         published,
         [
           MoneyAddedToWallet.new(
-            data: {wallet_id: aggregate_id, amount: amount}
+            data: {wallet_id: @aggregate_id, amount: amount}
           )
         ]
       )
     end
 
-    test 'amount added must be positive value' do
-      aggregate_id = SecureRandom.uuid
-      stream = "Wallets::Wallet$#{aggregate_id}"
-
+    test 'negative amount raises error' do
       amount = -100
 
       assert_raises(Wallet::InvalidAmount) do
         act(
-          stream,
+          @stream,
           AddMoneyToWallet.new(
-            wallet_id: aggregate_id,
+            wallet_id: @aggregate_id,
             amount: amount
           )
         )
